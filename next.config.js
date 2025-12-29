@@ -12,4 +12,15 @@ const nextConfig = {
   ...(basePath ? { basePath, assetPrefix: basePath } : {})
 }
 
+// expose basePath at build-time to client code so we can reference images
+if (basePath) {
+  nextConfig.env = {
+    NEXT_PUBLIC_BASE_PATH: basePath
+  }
+} else {
+  nextConfig.env = {
+    NEXT_PUBLIC_BASE_PATH: ''
+  }
+}
+
 module.exports = nextConfig

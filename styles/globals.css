@@ -33,3 +33,46 @@ main {
     background: #fff;
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
 }
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+}
+
+.project-thumb img { width: 100%; height: 140px; object-fit: cover; display: block; }
+
+.project-body { padding: 0.8rem 1rem; }
+.project-body h4 { margin: 0 0 0.25rem 0; font-size: 1.05rem; }
+.project-body .muted { color: var(--muted); font-weight: 400; font-size: 0.85rem; margin-left: 0.5rem; }
+.project-body .desc { margin: 0.25rem 0; color: #334155; }
+.project-body .meta { margin-top: 0.5rem; font-size: 0.85rem; color: var(--muted); }
+
+.preview-modal { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; }
+.preview-backdrop { position: absolute; inset: 0; background: rgba(2,6,23,0.6); }
+.preview-inner { position: relative; z-index: 70; max-width: 900px; width: calc(100% - 2rem); background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 8px 24px rgba(2,6,23,0.4); }
+.preview-inner .close-btn { position: absolute; right: 0.5rem; top: 0.5rem; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; }
+.preview-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.5rem; margin-top: 0.75rem; }
+.preview-gallery img { width: 100%; height: 200px; object-fit: contain; background: #f3f4f6; border-radius: 6px; }
+
+.project-card button { background: var(--primary); color: #fff; border: none; padding: 0.4rem 0.7rem; border-radius: 6px; cursor: pointer; }
+.project-card a { margin-left: 0.5rem; color: var(--primary); }
+
+.projects-controls { display: inline-flex; align-items: center; gap: 0.5rem; }
+.projects-controls select { padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid #e5e7eb; background: #fff; }
+.projects-controls label { color: var(--muted); font-size: 0.9rem; }
+
+.sort-order-btn { margin-left: 0.4rem; padding: 0.25rem 0.45rem; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; }
+.sort-order-btn:hover { background: #f3f4f6; }
+
