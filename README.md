@@ -52,3 +52,33 @@
 
 ## 🔗 Me trouver ailleurs
 [cite_start][![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/angel-severan-1867582b1) [cite: 8]
+
+---
+
+## 🚧 Scaffold Next.js (TypeScript)
+
+J'ai ajouté un scaffold Next.js en TypeScript minimal dans ce dépôt pour démarrer ton portfolio.
+
+Commands utiles:
+
+```bash
+# installer les dépendances
+npm install
+
+# lancer en développement
+npm run dev
+
+# build + exporter en HTML statique (pour GitHub Pages)
+npm run export
+
+# déployer sur GitHub Pages (nécessite que tu aies configuré le remote)
+npm run deploy:gh
+```
+
+Déploiement recommandé:
+- **Vercel**: déploiement Next natif (supports SSR et optimisations). Très simple à connecter au repo.
+- **GitHub Pages**: possible en exportant le site statique avec `next export` (option `output: 'export'` activée). Limité si tu veux SSR.
+
+Souhaites-tu que je :
+- configure un workflow GitHub Actions pour déployer automatiquement sur GitHub Pages ?
+- ou configure les fichiers nécessaires pour déployer sur Vercel (recommandé) ?

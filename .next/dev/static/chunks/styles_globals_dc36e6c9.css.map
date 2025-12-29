@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///home/angel/dev/my-portfolio-v1/styles/globals.css"],"sourcesContent":[":root {\n    --bg: #f8fafc;\n    --text: #0f172a;\n    --muted: #64748b;\n    --primary: #2563eb;\n    --radius: 0.5rem;\n}\nhtml, body, #__next {\n    height: 100%;\n    min-height: 100%;\n}\nbody {\n    margin: 0;\n    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    background: var(--bg);\n    color: var(--text);\n    line-height: 1.6;\n    -webkit-font-smoothing: antialiased;\n}\na {\n    color: var(--primary);\n    text-decoration: underline;\n    transition: color 0.2s;\n}\na:hover {\n    color: #1d4ed8;\n}\nmain {\n    max-width: 900px;\n    margin: 0 auto;\n    padding: 2rem 1rem;\n    border-radius: var(--radius);\n    background: #fff;\n    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;AAOA;;;;;AAIA;;;;;;;;;AAQA;;;;;;AAKA;;;;AAGA"}}]
+}

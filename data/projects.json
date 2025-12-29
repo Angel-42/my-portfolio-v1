@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "zappy",
+    "title": "Zappy",
+    "year": 2024,
+    "description": "Jeu multijoueur en réseau (Epitech project) — serveur en C, GUI en C++.",
+    "tech": ["C", "C++", "Socket"],
+    "repo": "https://github.com/Angel-42/Zappy"
+  },
+  {
+    "slug": "raytracer",
+    "title": "Raytracer",
+    "year": 2023,
+    "description": "Moteur de rendu par lancer de rayons en C++.",
+    "tech": ["C++", "Math", "Rendering"],
+    "repo": "https://github.com/Angel-42/Raytracer"
+  }
+]
