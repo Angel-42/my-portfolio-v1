@@ -4,7 +4,7 @@
     "/projects/zappy": {
       "initialRevalidateSeconds": false,
       "srcRoute": "/projects/[slug]",
-      "dataRoute": "/_next/data/evm_Wfp0Bat903--Xb7Rl/projects/zappy.json",
+      "dataRoute": "/_next/data/Fe6u8SYRX3rzAY7u74S_y/projects/zappy.json",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -17,7 +17,7 @@
     "/projects/raytracer": {
       "initialRevalidateSeconds": false,
       "srcRoute": "/projects/[slug]",
-      "dataRoute": "/_next/data/evm_Wfp0Bat903--Xb7Rl/projects/raytracer.json",
+      "dataRoute": "/_next/data/Fe6u8SYRX3rzAY7u74S_y/projects/raytracer.json",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -31,9 +31,9 @@
   "dynamicRoutes": {
     "/projects/[slug]": {
       "routeRegex": "^/projects/([^/]+?)(?:/)?$",
-      "dataRoute": "/_next/data/evm_Wfp0Bat903--Xb7Rl/projects/[slug].json",
+      "dataRoute": "/_next/data/Fe6u8SYRX3rzAY7u74S_y/projects/[slug].json",
       "fallback": false,
-      "dataRouteRegex": "^/_next/data/evm_Wfp0Bat903\\-\\-Xb7Rl/projects/([^/]+?)\\.json$",
+      "dataRouteRegex": "^/_next/data/Fe6u8SYRX3rzAY7u74S_y/projects/([^/]+?)\\.json$",
       "allowHeader": [
         "host",
         "x-matched-path",
