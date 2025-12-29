@@ -24,10 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build and export (Next.js static)
-        run: |
-          npm run build
-          npm run export
+      - name: Build (export via npm script)
+        run: npm run export
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
