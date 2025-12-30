@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Sidebar from './Sidebar'
 
 type Props = {
   children: React.ReactNode
@@ -6,21 +7,26 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   return (
-    <div>
-      <header style={{padding: '1rem 2rem', borderBottom: '1px solid #eee'}}>
-        <nav style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
-          <h1 style={{margin: 0}}><Link href="/">Angel SEVERAN</Link></h1>
-          <div style={{marginLeft: 'auto'}}>
-            <Link href="/">Accueil</Link>
-            <span style={{padding: '0 0.6rem'}}>|</span>
-            <a href="/cv.pdf" target="_blank" rel="noreferrer">CV</a>
-          </div>
-        </nav>
-      </header>
-      <main style={{padding: '2rem'}}>{children}</main>
-      <footer style={{padding: '1rem 2rem', borderTop: '1px solid #eee', marginTop: '2rem'}}>
-        © {new Date().getFullYear()} Angel SEVERAN — <a href="mailto:severan.angel.pro@gmail.com">Contact</a>
-      </footer>
+    <div className="app-root">
+      <Sidebar />
+      <div className="app-main">
+        <header className="app-header">
+          <nav className="nav-bar">
+            <h1 className="brand"><Link href="/">Angel SEVERAN</Link></h1>
+            <div className="nav-actions">
+              <Link href="/">Accueil</Link>
+              <span className="sep">|</span>
+              <a href="/cv.pdf" target="_blank" rel="noreferrer">CV</a>
+            </div>
+          </nav>
+        </header>
+
+        <main className="app-content">{children}</main>
+
+        <footer className="app-footer">
+          © {new Date().getFullYear()} Angel SEVERAN — <a href="mailto:severan.angel.pro@gmail.com">Contact</a>
+        </footer>
+      </div>
     </div>
   )
 }

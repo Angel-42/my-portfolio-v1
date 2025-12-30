@@ -34,6 +34,56 @@ main {
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
 }
 
+/* Layout with left sidebar */
+.app-root { display: flex; min-height: 100vh; }
+.app-sidebar { width: 92px; transition: width 220ms ease, background 220ms ease; background: #071028; color: #fff; position: relative; }
+.app-sidebar.open { width: 280px; }
+.sidebar-inner { padding: 1rem; overflow: auto; height: 100vh; }
+.hamburger { position: absolute; top: 12px; right: -44px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: none; background: #071028; color: white; cursor: pointer; box-shadow: 0 8px 24px rgba(2,6,23,0.45); }
+.hamburger span { display: block; width: 18px; height: 2px; background: #fff; margin: 3px 0; }
+.whoami { margin-bottom: 1rem; }
+.whoami h4 { margin: 0 0 0.25rem 0; }
+.sidebar-section h5 { margin: 0 0 0.4rem 0; }
+.sidebar-section ul { list-style: none; padding: 0; margin: 0 0 0.8rem 0; }
+.sidebar-section li { margin: 0.25rem 0; }
+.sidebar-section a { color: #cfe8ff; text-decoration: none; }
+.contact a { color: #fff; }
+
+/* Active link styling */
+.sidebar-nav a,
+.sidebar-section a {
+    display: inline-block;
+    padding: 0.25rem 0.3rem;
+    border-radius: 6px;
+}
+.sidebar-nav a.active,
+.sidebar-section a.active {
+    background: linear-gradient(90deg, rgba(37,99,235,0.14), rgba(37,99,235,0.06));
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Improve readability when collapsed: show small excerpt */
+.app-sidebar { display: flex; flex-direction: column; align-items: flex-start; }
+.app-sidebar .sidebar-inner { display: none; }
+.app-sidebar.open .sidebar-inner { display: block; }
+.app-sidebar .hamburger { right: -44px; }
+
+.app-main { flex: 1; display: flex; flex-direction: column; }
+.app-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e6eef8; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0)); }
+.nav-bar { display:flex; align-items:center; gap:1rem; }
+.brand { margin: 0; font-size: 1.1rem; }
+.nav-actions { margin-left: auto; display:flex; gap:0.6rem; align-items:center; }
+.nav-actions a { color: var(--primary); }
+.app-content { padding: 1.5rem; }
+.app-footer { padding: 1rem 1.5rem; border-top: 1px solid #e6eef8; margin-top: auto; }
+
+/* collapsed sidebar small icons layout */
+.app-sidebar { display: flex; flex-direction: column; align-items: flex-start; }
+.app-sidebar .sidebar-inner { display: none; }
+.app-sidebar.open .sidebar-inner { display: block; }
+
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
