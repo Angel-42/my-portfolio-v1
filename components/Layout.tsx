@@ -51,6 +51,7 @@ export default function Layout({ children }: Props) {
   }, [])
 
   const { lang, toggle, t } = useLanguage()
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
   return (
     <div className={`app-root ${isHome ? 'home-page' : ''}`}>
@@ -59,8 +60,8 @@ export default function Layout({ children }: Props) {
           <div className="top-left">
             <Link href="/">
               <picture>
-                <source srcSet="/logo.png" type="image/png" />
-                <img src="/logo.svg" alt="logo" className="site-logo large" />
+                <source srcSet={`${base}/logo.png`} type="image/png" />
+                <img src={`${base}/logo.svg`} alt="logo" className="site-logo large" />
               </picture>
             </Link>
           </div>
