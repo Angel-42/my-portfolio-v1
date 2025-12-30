@@ -1,1 +1,0 @@
-{"pageProps":{"project":{"slug":"raytracer","title":"Raytracer","year":2025,"month":5,"category":"Gros Morceaux","status":"completed","description":"Moteur de rendu par lancer de rayons en C++.","tech":["C++","Math","Rendering"],"repo":"https://github.com/Angel-42/Raytracer","screenshots":["/images/raytracer.svg"]}},"__N_SSG":true}

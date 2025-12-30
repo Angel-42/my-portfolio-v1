@@ -1,1 +1,0 @@
-{"pageProps":{"project":{"slug":"asmminilibc","title":"AsmMinilibc","year":2025,"month":3,"category":"Gros Morceaux","status":"completed","description":"Réécriture d'une portion de la libc en Assembleur — bas niveau et optimisation.","tech":["Assembly","C"],"repo":"https://github.com/Angel-42/AsmMinilibc","screenshots":["/images/asmminilibc.svg"]}},"__N_SSG":true}

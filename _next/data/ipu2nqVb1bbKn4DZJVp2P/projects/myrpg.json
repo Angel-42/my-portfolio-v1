@@ -1,1 +1,0 @@
-{"pageProps":{"project":{"slug":"myrpg","title":"MyRPG","year":2024,"month":5,"category":"Jeux Vidéo & Algorithmique","status":"completed","description":"RPG complet en C avec CSFML — systèmes de collisions, affichage et logique de jeu.","tech":["C","CSFML"],"repo":"","screenshots":["/images/myrpg.svg"]}},"__N_SSG":true}
