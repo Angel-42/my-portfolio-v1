@@ -31,7 +31,9 @@ export default function ProjectCarousel({ projects }: Props) {
         <div className="carousel-slides" style={{ transform: `translateX(-${index * 100}%)` }}>
           {projects.map((p) => {
             const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
-            const src = p.screenshots?.[0] ? `${base}${p.screenshots[0]}` : `${base}/images/${p.slug}.svg`
+            // keep `src` as a site-root relative path (e.g. `/images/...`)
+            // and prefix `base` only when rendering to avoid double-prefixes
+            const src = p.screenshots?.[0] ? p.screenshots[0] : `/images/${p.slug}.svg`
             const titleText = typeof p.title === 'string' ? p.title : (p.title?.[lang] || p.title?.fr || p.title?.en || '')
             return (
               <div className="slide" key={p.slug}>

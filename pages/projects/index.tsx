@@ -22,7 +22,11 @@ export default function ProjectsPage() {
           let got = false
           for (const ext of exts) {
             try {
-              const url = `${base}/images/${slug}-${i}${ext}`
+              // discover using site-root relative paths (no base here)
+              // so the runtime can consistently prefix `NEXT_PUBLIC_BASE_PATH`
+              // once when rendering. This avoids double-prefixing that
+              // caused `/my-portfolio-v1/my-portfolio-v1/...` 404s.
+              const url = `/images/${slug}-${i}${ext}`
               const res = await fetch(url, { method: 'GET' })
               if (res.ok) { found.push(url); got = true; break }
             } catch (e) {

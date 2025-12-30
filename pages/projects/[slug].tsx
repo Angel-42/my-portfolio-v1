@@ -91,11 +91,11 @@ export const getStaticProps: GetStaticProps = async (context) =>
             const nb = Number((b.match(/-(\\d+)\./) || [0,0])[1] || 0)
             return na - nb
           })
-          // map to public paths; include base path if configured so the
-          // client-side rendering and static pages resolve correctly when
-          // deployed under a subpath (e.g., GitHub Pages).
-          const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
-          project.screenshots = matched.map((f) => `${base}/images/${f}`)
+          // map to public paths; store paths relative to the site root
+          // (do NOT include the `base` here). The runtime should prefix
+          // `NEXT_PUBLIC_BASE_PATH` once so we avoid double-prefixing
+          // (which caused `/my-portfolio-v1/my-portfolio-v1/...` 404s).
+          project.screenshots = matched.map((f) => `/images/${f}`)
         }
       }
     } catch (e) {
