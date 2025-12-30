@@ -1,32 +1,81 @@
 import Link from 'next/link'
-import Sidebar from './Sidebar'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 type Props = {
   children: React.ReactNode
 }
 
 export default function Layout({ children }: Props) {
+  const router = useRouter()
+  const isHome = router.pathname === '/' || router.asPath === '/'
+
+  useEffect(() => {
+    const header = document.querySelector('.top-header') as HTMLElement | null
+    const hero = document.querySelector('.site-hero') as HTMLElement | null
+    if (!header) return
+
+    const update = () => {
+      if (!hero) {
+        header.classList.add('solid')
+        header.classList.remove('over-hero')
+        return
+      }
+      const heroRect = hero.getBoundingClientRect()
+      const headerHeight = header.offsetHeight
+      // if hero still extends below header, we are overlapping hero
+      if (heroRect.bottom > headerHeight) {
+        header.classList.add('over-hero')
+        header.classList.remove('solid')
+      } else {
+        header.classList.remove('over-hero')
+        header.classList.add('solid')
+      }
+    }
+
+    // set body padding to avoid content jump under fixed header
+    const setBodyPadding = () => {
+      document.body.style.paddingTop = `${header.offsetHeight}px`
+    }
+
+    update()
+    setBodyPadding()
+    window.addEventListener('scroll', update)
+    window.addEventListener('resize', () => { update(); setBodyPadding() })
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', () => { update(); setBodyPadding() })
+      document.body.style.paddingTop = ''
+    }
+  }, [])
+
   return (
-    <div className="app-root">
-      <Sidebar />
-      <div className="app-main">
-        <header className="app-header">
-          <nav className="nav-bar">
-            <h1 className="brand"><Link href="/">Angel SEVERAN</Link></h1>
-            <div className="nav-actions">
-              <Link href="/">Accueil</Link>
-              <span className="sep">|</span>
-              <a href="/cv.pdf" target="_blank" rel="noreferrer">CV</a>
-            </div>
+    <div className={`app-root ${isHome ? 'home-page' : ''}`}>
+      <header className="top-header">
+        <div className="top-inner">
+          <div className="top-left">
+            <Link href="/">
+              <picture>
+                <source srcSet="/logo.png" type="image/png" />
+                <img src="/logo.svg" alt="logo" className="site-logo large" />
+              </picture>
+            </Link>
+          </div>
+
+          <nav className="top-nav">
+            <Link href="/about" className="nav-link">ABOUT</Link>
+            <Link href="/projects" className="nav-link">WORK</Link>
+            <Link href="/news" className="nav-link">CHRONICLES</Link>
+            <Link href="/contact" className="nav-link">CONTACT</Link>
           </nav>
-        </header>
+        </div>
+      </header>
 
-        <main className="app-content">{children}</main>
+      <main className="app-content">{children}</main>
 
-        <footer className="app-footer">
-          © {new Date().getFullYear()} Angel SEVERAN — <a href="mailto:severan.angel.pro@gmail.com">Contact</a>
-        </footer>
-      </div>
+      <footer className="app-footer">
+        © {new Date().getFullYear()} Angel SEVERAN — <a href="mailto:severan.angel.pro@gmail.com">Contact</a>
+      </footer>
     </div>
   )
 }
