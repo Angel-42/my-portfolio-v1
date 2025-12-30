@@ -10,6 +10,7 @@ import { useLanguage } from '../context/LanguageContext'
 export default function Home({ latest }: { latest?: NewsItem[] }) {
   const [projectsState, setProjectsState] = useState(() => projects)
   const { t, lang } = useLanguage()
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
   // on mount, try to discover public images named slug-1, slug-2... and attach them to projects
   useEffect(() => {
@@ -115,7 +116,7 @@ export default function Home({ latest }: { latest?: NewsItem[] }) {
             <p style={{fontSize: '1.05rem', color: 'rgba(255,255,255,0.92)'}}>{t('HOME.HERO_SUBTITLE')}</p>
 
             <div style={{marginTop: 18, display: 'flex', gap: 10}} className="hero-cta">
-              <a href="/cv.pdf" className="btn btn-primary">{t('HOME.HERO_CV')}</a>
+              <a href={`${base}/cv.pdf`} className="btn btn-primary">{t('HOME.HERO_CV')}</a>
               <Link href="/contact" className="btn btn-ghost">{t('HOME.HERO_CONTACT')}</Link>
             </div>
           </div>
@@ -123,7 +124,8 @@ export default function Home({ latest }: { latest?: NewsItem[] }) {
           <div className="hero-grid small" aria-hidden>
             {featured.concat(projectsState.slice(3,6)).map((p:any, i:number) => {
               const titleText = typeof p.title === 'string' ? p.title : (p.title?.[lang] || p.title?.fr || p.title?.en || p.slug)
-              return <img key={p.slug + i} src={p.screenshots?.[0] || `/images/${p.slug}.svg`} alt={titleText} />
+              const src = p.screenshots?.[0] ? `${base}${p.screenshots[0]}` : `${base}/images/${p.slug}.svg`
+              return <img key={p.slug + i} src={src} alt={titleText} />
             })}
           </div>
         </div>

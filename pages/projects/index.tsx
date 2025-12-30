@@ -13,6 +13,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     let mounted = true
     const exts = ['.png', '.jpg', '.jpeg', '.webp', '.svg']
+    const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
     ;(async () => {
       const updated = await Promise.all(projects.map(async (p:any) => {
         const slug = p.slug
@@ -21,7 +22,7 @@ export default function ProjectsPage() {
           let got = false
           for (const ext of exts) {
             try {
-              const url = `/images/${slug}-${i}${ext}`
+              const url = `${base}/images/${slug}-${i}${ext}`
               const res = await fetch(url, { method: 'GET' })
               if (res.ok) { found.push(url); got = true; break }
             } catch (e) {

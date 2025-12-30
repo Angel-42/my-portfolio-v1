@@ -22,13 +22,18 @@ async function fetchGithubEvents(username = 'Angel-42'): Promise<NewsItem[]> {
     const items: NewsItem[] = []
     for (const ev of events) {
       if (ev.type === 'CreateEvent' && ev.payload?.ref_type === 'repository') {
+        // create bilingual title/summary so the frontend can select language
+        const repoName = ev.repo?.name || 'repo'
         items.push({
           id: `gh-create-${ev.id}`,
           type: 'github',
           tag: 'REPO',
-          title: `Nouveau dépôt publié: ${ev.repo?.name || 'repo'}`,
+          title: {
+            en: `New repository published: ${repoName}`,
+            fr: `Nouveau dépôt publié: ${repoName}`
+          },
           date: ev.created_at,
-          summary: ev.payload?.description || '',
+          summary: ev.payload?.description ? { en: ev.payload.description, fr: ev.payload.description } : '',
           url: `https://github.com/${ev.repo?.name}`,
           source: 'github'
         })
@@ -52,9 +57,12 @@ async function fetchGithubRepos(username = 'Angel-42'): Promise<NewsItem[]> {
       id: `gh-repo-${r.id}`,
       type: 'github',
       tag: 'REPO',
-      title: `Nouveau dépôt publié: ${r.name}`,
+      title: {
+        en: `New repository published: ${r.name}`,
+        fr: `Nouveau dépôt publié: ${r.name}`
+      },
       date: r.created_at || r.pushed_at || new Date().toISOString(),
-      summary: r.description || '',
+      summary: r.description ? { en: r.description, fr: r.description } : '',
       url: r.html_url,
       source: 'github'
     }))
