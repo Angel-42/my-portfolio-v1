@@ -1,14 +1,17 @@
+import { useLanguage } from '../context/LanguageContext'
+
 export default function Contact() {
+  const { t } = useLanguage()
   return (
     <div>
-      <h2>Contact</h2>
-      <p>Tu peux me contacter par email : <a href="mailto:severan.angel.pro@gmail.com">severan.angel.pro@gmail.com</a></p>
-      <p>Télécharger mon CV : <a href="/cv.pdf" target="_blank" rel="noreferrer">CV (PDF)</a></p>
-      <h3 style={{marginTop: '1rem'}}>Réseaux</h3>
+      <h2>{t('CONTACT.TITLE')}</h2>
+      <p>{t('CONTACT.EMAIL_LINE')} <a href="mailto:severan.angel.pro@gmail.com">severan.angel.pro@gmail.com</a></p>
+      <p>{t('CONTACT.CV_LINE')} <a href="/cv.pdf" target="_blank" rel="noreferrer">CV (PDF)</a></p>
+      <h3 style={{marginTop: '1rem'}}>{t('CONTACT.NETWORKS_TITLE')}</h3>
       <ul>
-        <li><a href="mailto:severan.angel.pro@gmail.com">Email</a></li>
-        <li><a href="https://linkedin.com/in/angel-severan-1867582b1" target="_blank" rel="noreferrer">LinkedIn</a></li>
-        <li><a href="https://github.com/Angel-42" target="_blank" rel="noreferrer">GitHub</a></li>
+        <li><a href="mailto:severan.angel.pro@gmail.com">{t('CONTACT.EMAIL_LABEL')}</a></li>
+        <li><a href="https://linkedin.com/in/angel-severan-1867582b1" target="_blank" rel="noreferrer">{t('CONTACT.LINKEDIN_LABEL')}</a></li>
+        <li><a href="https://github.com/Angel-42" target="_blank" rel="noreferrer">{t('CONTACT.GITHUB_LABEL')}</a></li>
       </ul>
     </div>
   )

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 
 type Props = { projects: any[] }
 
@@ -8,6 +9,7 @@ export default function ProjectCarousel({ projects }: Props) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const intervalRef = useRef<number | null>(null)
+  const { lang } = useLanguage()
 
   useEffect(() => {
     if (paused || projects.length === 0) return
@@ -29,11 +31,12 @@ export default function ProjectCarousel({ projects }: Props) {
         <div className="carousel-slides" style={{ transform: `translateX(-${index * 100}%)` }}>
           {projects.map((p) => {
             const src = p.screenshots?.[0] || `/images/${p.slug}.svg`
+            const titleText = typeof p.title === 'string' ? p.title : (p.title?.[lang] || p.title?.fr || p.title?.en || '')
             return (
               <div className="slide" key={p.slug}>
                     <a href={`${base}/projects/${p.slug}`} className="carousel-link">
                       {p.screenshots?.[0] ? (
-                        <img className="carousel-image" src={`${base}${src}`} alt={p.title} loading="lazy" />
+                        <img className="carousel-image" src={`${base}${src}`} alt={titleText} loading="lazy" />
                       ) : (
                         <div className="carousel-fallback" aria-hidden>
                           <div className="fallback-gradient" />
@@ -41,7 +44,7 @@ export default function ProjectCarousel({ projects }: Props) {
                       )}
 
                       <div className="carousel-caption">
-                        <h4>{(p.title || '').replace(' (placeholder)','')}</h4>
+                        <h4>{(titleText || '').replace(' (placeholder)','')}</h4>
                         {p.year && <small className="muted">{p.year}</small>}
                         {p.tech && p.tech.length ? (
                           <div className="carousel-techs">

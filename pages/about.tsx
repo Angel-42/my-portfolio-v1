@@ -1,24 +1,19 @@
+import { useLanguage } from '../context/LanguageContext'
+
 export default function About() {
+  const { t } = useLanguage()
   return (
     <div>
-      <h2>À propos</h2>
-      <p>
-        Bonjour — je suis <strong>Angel SEVERAN</strong>, étudiant en 3ème année à <strong>Epitech Montpellier</strong>.
-      </p>
+      <h2>{t('ABOUT.TITLE')}</h2>
+      <p dangerouslySetInnerHTML={{ __html: t('ABOUT.INTRO') }} />
 
-      <h3 style={{marginTop: '1rem'}}>Qui suis‑je ?</h3>
-      <p>
-        Passionné par la programmation bas‑niveau et les architectures réseau, je travaille sur des projets en C/C++
-        (systèmes et jeux), ainsi que sur des projets modernes en TypeScript et Flutter.
-      </p>
+      <h3 style={{marginTop: '1rem'}}>{t('ABOUT.WHOAMI_TITLE')}</h3>
+      <p>{t('ABOUT.WHOAMI_DESC')}</p>
 
-      <h3 style={{marginTop: '1rem'}}>Recherche</h3>
-      <p>
-        Je suis à la recherche d'un <strong>stage de 4 à 6 mois</strong> à partir d'avril 2026, idéalement en
-        développement système, mobile ou web. Je suis ouvert aux opportunités en France et à l'international.
-      </p>
+      <h3 style={{marginTop: '1rem'}}>{t('ABOUT.SEARCH_TITLE')}</h3>
+      <p dangerouslySetInnerHTML={{ __html: t('ABOUT.SEARCH_DESC') }} />
 
-      <h3 style={{marginTop: '1rem'}}>Compétences</h3>
+      <h3 style={{marginTop: '1rem'}}>{t('ABOUT.SKILLS_TITLE')}</h3>
       <ul>
         <li>C / C++ / Bas niveau</li>
         <li>TypeScript / Node.js / Web</li>
@@ -26,11 +21,11 @@ export default function About() {
         <li>Linux, Bash, Git</li>
       </ul>
 
-      <h3 style={{marginTop: '1rem'}}>Formation</h3>
-      <p>Epitech Montpellier — 3ème année (parcours informatique)</p>
+      <h3 style={{marginTop: '1rem'}}>{t('ABOUT.FORMATION_TITLE')}</h3>
+      <p>{t('ABOUT.FORMATION_TITLE')} — 3ème année (parcours informatique)</p>
 
-      <h3 style={{marginTop: '1rem'}}>Contact</h3>
-      <p>Mail : <a href="mailto:severan.angel.pro@gmail.com">severan.angel.pro@gmail.com</a></p>
+      <h3 style={{marginTop: '1rem'}}>{t('ABOUT.CONTACT_TITLE')}</h3>
+      <p>{t('CONTACT.EMAIL_LINE')} <a href="mailto:severan.angel.pro@gmail.com">severan.angel.pro@gmail.com</a></p>
     </div>
   )
 }

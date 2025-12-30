@@ -4,13 +4,16 @@ import Link from 'next/link'
 import React from 'react'
 import { remark } from 'remark'
 import remarkHtml from 'remark-html'
+import { useLanguage } from '../../context/LanguageContext'
+
+type LocalizedString = string | { fr?: string; en?: string; [k: string]: string | undefined }
 
 type Project = {
   slug: string
-  title: string
+  title: LocalizedString
   year?: number
   month?: number
-  description?: string
+  description?: LocalizedString
   tech?: string[]
   repo?: string
   screenshots?: string[]
@@ -18,30 +21,43 @@ type Project = {
 
 // We use `remark` + `remark-html` in getStaticProps to convert README.md to HTML.
 
-export default function ProjectPage({ project, readmeHtml }: { project: Project | null, readmeHtml?: string | null })
-{
-  if (!project) return <div>Projet non trouvé — <Link href="/">Retour</Link></div>
+export default function ProjectPage({ project, readmeHtml }: { project: Project | null, readmeHtml?: any }) {
+  const { t, lang } = useLanguage()
+  if (!project) {
+    return (
+      <div>{t('PROJECTS.NOT_FOUND')} — <Link href="/">{t('BUTTONS.BACK')}</Link></div>
+    )
+  }
+
+  const getText = (v?: LocalizedString) => {
+    if (!v) return ''
+    return typeof v === 'string' ? v : (v?.[lang] || v?.fr || v?.en || '')
+  }
+
+  const titleText = getText(project.title)
+  const descText = getText(project.description)
+
   return (
     <article>
-      <h2>{project.title}</h2>
+      <h2>{titleText}</h2>
       {project.year && <p><em>{project.year}{project.month ? `/${project.month}` : ''}</em></p>}
-      <p>{project.description}</p>
+      <p>{descText}</p>
 
       {project.screenshots && project.screenshots.length > 0 && (
         <div className="project-gallery">
           {project.screenshots.map((s, i) => (
-            <img key={i} src={s} alt={`${project.title} ${i+1}`} />
+            <img key={i} src={s} alt={`${titleText} ${i+1}`} />
           ))}
         </div>
       )}
 
-      {project.tech && <p><strong>Tech:</strong> {project.tech.join(', ')}</p>}
-      {project.repo && <p><a href={project.repo} target="_blank" rel="noreferrer">Voir le repo</a></p>}
+      {project.tech && <p><strong>{t('PROJECTS.TECH_LABEL') || 'Tech:'}</strong> {project.tech.join(', ')}</p>}
+      {project.repo && <p><a href={project.repo} target="_blank" rel="noreferrer">{t('BUTTONS.VIEW_CODE')}</a></p>}
 
       {readmeHtml ? (
-        <section className="project-readme" dangerouslySetInnerHTML={{ __html: readmeHtml }} />
+        <section className="project-readme" dangerouslySetInnerHTML={{ __html: (typeof readmeHtml === 'string' ? readmeHtml : (readmeHtml?.[lang] || readmeHtml?.fr || readmeHtml?.en || '')) }} />
       ) : (
-        <p>Aucun README disponible pour ce projet.</p>
+        <p>{t('PROJECTS.NO_README')}</p>
       )}
     </article>
   )
@@ -84,37 +100,77 @@ export const getStaticProps: GetStaticProps = async (context) =>
     }
   }
 
-  let readmeHtml: string | null = null
+  // We'll attempt to fetch both the English README (`README.md`) and the
+  // French README (`README_fr.md`). The user keeps two files in the repo
+  // so prefer the language-specific file when available.
+  let readmeHtml: { fr?: string | null; en?: string | null } | null = null
   if (project && project.repo) {
     try {
-      // try to parse a GitHub repo URL like https://github.com/owner/repo
       const m = project.repo.match(/github.com\/(.+?)\/(.+?)(?:\.git|$|\/)/)
       if (m) {
         const owner = m[1]
         const repo = m[2]
-        // attempt to fetch README from raw.githubusercontent (default branch main/master)
-        // try main then master
-        const tryUrls = [
-          `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`,
-          `https://raw.githubusercontent.com/${owner}/${repo}/master/README.md`,
-          `https://raw.githubusercontent.com/${owner}/${repo}/main/readme.md`,
-          `https://raw.githubusercontent.com/${owner}/${repo}/master/readme.md`,
-        ]
-        let md: string | null = null
-        for (const u of tryUrls) {
-          const res = await fetch(u)
-          if (res.ok) {
-            md = await res.text()
-            break
+
+        const makeRaw = (branch: string, filename: string) => `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filename}`
+        const filenameCandidates = {
+          en: [
+            'README.md',
+            'readme.md'
+          ],
+          fr: [
+            'README_fr.md',
+            'README-fr.md',
+            'readme_fr.md',
+            'readme-fr.md'
+          ]
+        }
+
+        // try branches and filenames
+        const branches = ['main', 'master']
+
+        const fetchFirst = async (candidates: string[]) => {
+          for (const br of branches) {
+            for (const fname of candidates) {
+              const url = makeRaw(br, fname)
+              try {
+                const res = await fetch(url)
+                if (res.ok) return await res.text()
+              } catch (e) {
+                // ignore fetch errors for this url and continue
+              }
+            }
+          }
+          return null
+        }
+
+        const md_en = await fetchFirst(filenameCandidates.en)
+        const md_fr = await fetchFirst(filenameCandidates.fr)
+
+        const htmlObj: { fr?: string | null; en?: string | null } = {}
+        if (md_en) {
+          const processedEn = await remark().use(remarkHtml).process(md_en)
+          htmlObj.en = processedEn.toString()
+        }
+        if (md_fr) {
+          const processedFr = await remark().use(remarkHtml).process(md_fr)
+          htmlObj.fr = processedFr.toString()
+        }
+
+        // If neither language-specific README was found, try to fall back to
+        // any README.md we can find (best-effort). This keeps behavior safe
+        // for repos that only have a single README.
+        if (!htmlObj.en && !htmlObj.fr) {
+          const fallback = await fetchFirst(['README.md', 'readme.md'])
+          if (fallback) {
+            const processed = await remark().use(remarkHtml).process(fallback)
+            htmlObj.en = processed.toString()
           }
         }
-        if (md) {
-          const processed = await remark().use(remarkHtml).process(md)
-          readmeHtml = processed.toString()
-        }
+
+        readmeHtml = htmlObj
       }
     } catch (e) {
-      // ignore fetch errors
+      // ignore fetch/processing errors and leave readmeHtml as null
       readmeHtml = null
     }
   }

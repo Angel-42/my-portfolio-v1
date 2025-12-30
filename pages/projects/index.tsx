@@ -1,11 +1,13 @@
 import { useMemo, useState, useEffect } from 'react'
 import projects from '../../data/projects.json'
 import ProjectCard from '../../components/ProjectCard'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function ProjectsPage() {
   const [sortMode, setSortMode] = useState<'alpha' | 'date'>('date')
   const [order, setOrder] = useState<'desc' | 'asc'>('desc')
   const [projectsState, setProjectsState] = useState(() => projects)
+  const { t, lang } = useLanguage()
 
   // discover images named slug-1, slug-2, ... in public/images and attach to project data
   useEffect(() => {
@@ -39,7 +41,11 @@ export default function ProjectsPage() {
   const sorted = useMemo(() => {
     const list = [...projectsState]
     if (sortMode === 'alpha') {
-      list.sort((a:any,b:any) => (a.title||'').localeCompare(b.title||''))
+      list.sort((a:any,b:any) => {
+        const ta = typeof a.title === 'string' ? a.title : (a.title?.[lang] || a.title?.fr || a.title?.en || '')
+        const tb = typeof b.title === 'string' ? b.title : (b.title?.[lang] || b.title?.fr || b.title?.en || '')
+        return ta.localeCompare(tb)
+      })
     } else {
       list.sort((a:any,b:any) => {
         const ay = a.year || 0
@@ -59,32 +65,32 @@ export default function ProjectsPage() {
 
   return (
     <div>
-      <h2>Tous mes projets</h2>
+      <h2>{t('PROJECTS.TITLE')}</h2>
 
       <div style={{marginTop: '1rem', display: 'flex', gap: 12, alignItems: 'center'}}>
         <div className="projects-controls">
-          <label> Trier par: </label>
+          <label> {t('PROJECTS.SORT_BY')}: </label>
           <select value={sortMode} onChange={(e) => setSortMode(e.target.value as any)}>
-            <option value="date">Date</option>
-            <option value="alpha">Alphabet</option>
+            <option value="date">{t('PROJECTS.SORT_DATE')}</option>
+            <option value="alpha">{t('PROJECTS.SORT_ALPHA')}</option>
           </select>
-          <button className="sort-order-btn" onClick={() => setOrder(o => o === 'desc' ? 'asc' : 'desc')}>{order === 'desc' ? 'Desc' : 'Asc'}</button>
+          <button className="sort-order-btn" onClick={() => setOrder(o => o === 'desc' ? 'asc' : 'desc')}>{order === 'desc' ? t('PROJECTS.ORDER_DESC') : t('PROJECTS.ORDER_ASC')}</button>
         </div>
       </div>
 
       <section style={{marginTop: '1.6rem'}}>
-        <h3>En cours</h3>
-        <p>Projets actuellement en développement.</p>
+        <h3>{t('PROJECTS.IN_PROGRESS')}</h3>
+        <p>{t('PROJECTS.IN_PROGRESS_DESC')}</p>
         <div className="bento-grid" style={{marginTop: '1rem'}}>
           {inProgress.length ? inProgress.map((p:any) => (
             <ProjectCard key={p.slug} project={p} variant={(p.screenshots && p.screenshots.length > 0) ? 'large' : 'small'} />
-          )) : <div>Aucun projet en cours pour l'instant.</div>}
+          )) : <div>{t('PROJECTS.NONE_IN_PROGRESS')}</div>}
         </div>
       </section>
 
       <section style={{marginTop: '2rem'}}>
-        <h3>Autres projets</h3>
-        <p>Projets terminés ou archivés.</p>
+        <h3>{t('PROJECTS.OTHER_PROJECTS')}</h3>
+        <p>{t('PROJECTS.OTHER_DESC')}</p>
         <div className="bento-grid" style={{marginTop: '1rem'}}>
           {others.map((p:any) => (
             <ProjectCard key={p.slug} project={p} variant={(p.screenshots && p.screenshots.length > 0) ? 'large' : 'small'} />

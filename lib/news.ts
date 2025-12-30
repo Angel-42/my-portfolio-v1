@@ -5,9 +5,9 @@ type NewsItem = {
   id: string
   type: 'manual' | 'github' | 'linkedin' | 'project'
   tag: 'NEWS' | 'REPO' | 'POST'
-  title: string
+  title: string | { fr?: string; en?: string; [k:string]: string | undefined }
   date: string
-  summary?: string
+  summary?: string | { fr?: string; en?: string; [k:string]: string | undefined }
   url?: string
   source?: string
 }
@@ -60,6 +60,8 @@ async function fetchGithubRepos(username = 'Angel-42'): Promise<NewsItem[]> {
     }))
     return items
   } catch (e) {
+    // don't throw here; return empty so caller can decide fallback
+    console.warn('fetchGithubRepos failed:', (e as any)?.message ?? e)
     return []
   }
 }
@@ -78,12 +80,7 @@ export async function getAllNews() : Promise<NewsItem[]> {
   // fetch public repos and create news items from repo creation
   const ghRepos = await fetchGithubRepos()
 
-  // NOTE: do not generate news from local projects.json; prefer real GitHub repo data
-
-  // TODO: LinkedIn integration requires API/token; skip for now — user can add manual linkedin items in news.json
-
-  // Merge manual, github repos and github events
-  // Deduplicate by id (keep first occurrence)
+  // Merge manual, github repos and github events (no local fallback here)
   const combined = [...manual, ...ghRepos, ...gh]
   const seen = new Set<string>()
   const merged: NewsItem[] = []

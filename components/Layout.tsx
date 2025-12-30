@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useLanguage } from '../context/LanguageContext'
 
 type Props = {
   children: React.ReactNode
@@ -49,6 +50,8 @@ export default function Layout({ children }: Props) {
     }
   }, [])
 
+  const { lang, toggle, t } = useLanguage()
+
   return (
     <div className={`app-root ${isHome ? 'home-page' : ''}`}>
       <header className="top-header">
@@ -63,18 +66,29 @@ export default function Layout({ children }: Props) {
           </div>
 
           <nav className="top-nav">
-            <Link href="/about" className="nav-link">ABOUT</Link>
-            <Link href="/projects" className="nav-link">WORK</Link>
-            <Link href="/news" className="nav-link">CHRONICLES</Link>
-            <Link href="/contact" className="nav-link">CONTACT</Link>
+            <Link href="/about" className="nav-link">{t('NAV.ABOUT').toUpperCase()}</Link>
+            <Link href="/projects" className="nav-link">{t('NAV.WORK').toUpperCase()}</Link>
+            <Link href="/news" className="nav-link">{t('NAV.CHRONICLES').toUpperCase()}</Link>
+            <Link href="/contact" className="nav-link">{t('NAV.CONTACT').toUpperCase()}</Link>
           </nav>
+
+          <div className="top-right">
+            <button
+              className="lang-toggle"
+              onClick={toggle}
+              aria-label={lang === 'en' ? t('HEADER.TOGGLE_TO_FR') : t('HEADER.TOGGLE_TO_EN')}
+              title={lang === 'en' ? t('HEADER.TOGGLE_TO_FR') : t('HEADER.TOGGLE_TO_EN')}
+            >
+              {lang === 'en' ? 'EN' : 'FR'}
+            </button>
+          </div>
         </div>
       </header>
 
       <main className="app-content">{children}</main>
 
       <footer className="app-footer">
-        © {new Date().getFullYear()} Angel SEVERAN — <a href="mailto:severan.angel.pro@gmail.com">Contact</a>
+        © {new Date().getFullYear()} Angel SEVERAN — <a href="mailto:severan.angel.pro@gmail.com">{t('FOOTER.CONTACT')}</a>
       </footer>
     </div>
   )
