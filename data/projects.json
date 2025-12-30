@@ -8,7 +8,7 @@
     "status": "completed",
     "description": "Jeu multijoueur en réseau (Epitech project) — serveur en C, GUI en C++.",
     "tech": ["C", "C++", "Socket"],
-    "repo": "",
+    "repo": "https://github.com/Angel-42/Zappy",
     "screenshots": ["/images/zappy.svg"]
   },
   {
@@ -32,7 +32,7 @@
     "status": "in-progress",
     "description": "R-Type — projet d'année en cours, multithreading et réseau complexe.",
     "tech": ["C++", "Threads", "Network"],
-    "repo": "",
+    "repo": "https://github.com/EpiType/Air-Trap",
     "screenshots": ["/images/rtype.svg"]
   },
   {
@@ -68,7 +68,7 @@
     "status": "in-progress",
     "description": "Jeu/outil mobile développé en Flutter — montre la maîtrise du mobile et des patterns modernes.",
     "tech": ["Flutter", "Dart"],
-    "repo": "",
+    "repo": "https://github.com/Angel-42/Dice-Destiny-Idle-Rifts",
     "screenshots": ["/images/dice-destiny.svg"]
   },
   {
@@ -80,7 +80,7 @@
     "status": "in-progress",
     "description": "Tower Defense en C++ — IA, gestion de vagues, pathfinding.",
     "tech": ["C++", "AI", "Algorithms"],
-    "repo": "",
+    "repo": "https://github.com/Angel-42/IronholdTD",
     "screenshots": ["/images/ironholdtd.svg"]
   },
   {
@@ -92,7 +92,7 @@
     "status": "completed",
     "description": "RPG complet en C avec CSFML — systèmes de collisions, affichage et logique de jeu.",
     "tech": ["C", "CSFML"],
-    "repo": "",
+    "repo": "https://github.com/Angel-42/Successor-RPG-",
     "screenshots": ["/images/myrpg.svg"]
   },
   {
@@ -104,7 +104,7 @@
     "status": "completed",
     "description": "Solution d'algorithmes et interface terminale en C (ncurses).",
     "tech": ["C", "ncurses", "Algorithms"],
-    "repo": "",
+    "repo": "https://github.com/Angel-42/Sokoban",
     "screenshots": ["/images/sokoban.svg"]
   }
 ]
