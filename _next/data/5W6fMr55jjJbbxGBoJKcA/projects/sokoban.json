@@ -1,1 +1,0 @@
-{"pageProps":{"project":{"slug":"sokoban","title":"Sokoban","year":2022,"category":"Jeux Vidéo & Algorithmique","status":"completed","description":"Solution d'algorithmes et interface terminale en C (ncurses).","tech":["C","ncurses","Algorithms"],"repo":"","screenshots":["/images/sokoban.svg"]}},"__N_SSG":true}
