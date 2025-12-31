@@ -13,6 +13,14 @@
     --glass-alpha: 0.08;
     --content-max: 1200px;
 }
+/* Responsive base font sizing */
+html { font-size: clamp(14px, 1.4vw, 18px); }
+
+/* Make media elements responsive by default */
+img, picture, video, svg { max-width: 100%; height: auto; display: block; }
+
+/* Simple container utility used across pages/components */
+.container { width: 100%; max-width: var(--content-max); margin: 0 auto; padding: 0 1rem; }
 html, body, #__next {
     height: 100%;
     min-height: 100%;
@@ -41,38 +49,8 @@ main {
     padding: 2rem 1rem;
 }
 
-/* Layout with left sidebar */
+/* Sidebar removed: left navigation UI and styles have been removed */
 .app-root { min-height: 100vh; display: block; }
-.app-sidebar { display: none; }
-.hamburger { position: absolute; top: 12px; right: -44px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: none; background: #071028; color: white; cursor: pointer; box-shadow: 0 8px 24px rgba(2,6,23,0.45); }
-.hamburger span { display: block; width: 18px; height: 2px; background: #fff; margin: 3px 0; }
-.whoami { margin-bottom: 1rem; }
-.whoami h4 { margin: 0 0 0.25rem 0; }
-.sidebar-section h5 { margin: 0 0 0.4rem 0; }
-.sidebar-section ul { list-style: none; padding: 0; margin: 0 0 0.8rem 0; }
-.sidebar-section li { margin: 0.25rem 0; }
-.sidebar-section a { color: #cfe8ff; text-decoration: none; }
-.contact a { color: #fff; }
-
-/* Active link styling */
-.sidebar-nav a,
-.sidebar-section a {
-    display: inline-block;
-    padding: 0.25rem 0.3rem;
-    border-radius: 6px;
-}
-.sidebar-nav a.active,
-.sidebar-section a.active {
-    background: linear-gradient(90deg, rgba(37,99,235,0.14), rgba(37,99,235,0.06));
-    color: #fff;
-    font-weight: 600;
-}
-
-/* Improve readability when collapsed: show small excerpt */
-.app-sidebar { display: flex; flex-direction: column; align-items: flex-start; }
-.app-sidebar .sidebar-inner { display: none; }
-.app-sidebar.open .sidebar-inner { display: block; }
-.app-sidebar .hamburger { right: -44px; }
 
 .top-header { position: fixed; top: 0; left: 0; right: 0; z-index: 999; background: transparent; padding: 18px 20px; transition: background 220ms ease, backdrop-filter 220ms ease, box-shadow 220ms ease; }
 .top-inner { max-width: 1200px; margin: 0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
@@ -102,12 +80,7 @@ main {
 .app-content { padding: 1.5rem; max-width: 1200px; margin: 1.25rem auto; }
 .app-footer { padding: 1rem 1.5rem; border-top: 1px solid #e6eef8; margin-top: auto; }
 
-/* collapsed sidebar small icons layout */
-.app-sidebar { display: flex; flex-direction: column; align-items: flex-start; }
-.app-sidebar .sidebar-inner { display: none; }
-.app-sidebar.open .sidebar-inner { display: block; }
-
-
+/* (sidebar removed) */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -130,15 +103,21 @@ main {
     .bento-grid .project-card.large { grid-column: span 2; grid-row: span 2; }
     .bento-grid .project-card.small { grid-column: span 2; }
 }
-@media (max-width: 700px) {
-
 @media (min-width: 1200px) {
     .site-logo { height:56px; }
     .top-header { padding: 20px 12px; }
     .site-logo.large { height:96px; }
 }
+@media (max-width: 700px) {
     .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; }
     .bento-grid .project-card.large { grid-column: 1 / -1; grid-row: auto; }
+}
+
+/* (sidebar removed) */
+
+/* No sidebar: full-width content on all sizes */
+@media (min-width: 1000px) {
+    .app-content { margin-left: 0; max-width: 1200px; }
 }
 
 .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 10px 30px rgba(2,6,23,0.45); transition: transform 220ms ease, box-shadow 220ms ease; }
@@ -347,5 +326,76 @@ main {
 .latest-news h3 { color: #f3f0ff; font-size: 1.05rem; }
 .latest-news a { color: #bfe8ff; font-weight:700; }
 .latest-news strong { display:block; font-size:1.02rem; color: #fff }
+
+
+/* ------------------ Responsive improvements ------------------ */
+@media (max-width: 900px) {
+    /* Header stacks: logo on top, nav below (scrollable if needed) */
+    .top-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .top-left { margin-left: 0; }
+    .top-nav { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; overflow-x: auto; padding-bottom: 6px; }
+    .nav-link { font-size: 0.95rem; }
+    .site-logo.large { height: 64px; }
+
+    /* Hero: column layout for small screens */
+    .site-hero { padding: 2rem 1rem; display: block; }
+    .site-hero .hero-inner { display: flex; flex-direction: column; gap: 1.25rem; align-items: stretch; }
+    .hero-title { font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1.05; }
+    .hero-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 72px; }
+
+    /* Projects grid: tighter columns */
+    .projects-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.9rem; }
+    .bento-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; }
+
+    /* Project card: reduce thumb height on small screens */
+    .project-thumb { height: 140px; }
+    .project-card.large .project-thumb { height: 200px; }
+
+    /* Project gallery and readme: stack vertically */
+    .project-gallery { gap: 8px; }
+    .project-gallery img { width: 100%; height: auto; }
+
+    /* Modal preview: fit to viewport with scrolling */
+    .preview-inner { max-height: calc(100vh - 96px); overflow: auto; width: calc(100% - 2rem); }
+
+    /* Carousel smaller images */
+    .carousel-image { height: 220px; }
+    .carousel-caption { position: static; margin-top: 8px; }
+
+    /* App content should use full width with less padding */
+    .app-content { padding: 1rem; margin: 1rem; }
+}
+
+@media (max-width: 480px) {
+    /* Very small devices: single-column everything */
+    .top-inner { padding: 8px 12px; }
+    .site-logo.large { height: 56px; }
+    .nav-link { font-size: 0.85rem; padding: 6px 8px; }
+
+    .hero-title { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+    .hero-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 64px; }
+
+    .projects-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+
+    .project-thumb { height: 120px; }
+    .project-card.large .project-thumb { height: 160px; }
+
+    .carousel-image { height: 160px; }
+    .carousel-fallback { height: 160px; }
+
+    .project-body { padding: 10px; }
+    .project-body h4 { font-size: 0.98rem; }
+
+    .preview-inner .close-btn { right: 0.25rem; top: 0.25rem; }
+
+    body { font-size: 15px; }
+}
+
+/* Small accessibility tweak: ensure interactive elements have sufficient hit-area on touch */
+.nav-link, .btn, .lang-toggle, .carousel-btn { touch-action: manipulation; }
+
+/* End responsive improvements */
+
 
 

@@ -28,7 +28,29 @@ export default function ProjectCarousel({ projects }: Props) {
   return (
     <div className="carousel" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <div className="carousel-viewport">
-        <div className="carousel-slides" style={{ transform: `translateX(-${index * 100}%)` }}>
+        <div
+          className="carousel-slides"
+          style={{ transform: `translateX(-${index * 100}%)` }}
+          onTouchStart={(e) => {
+            const t = e.touches[0]
+            touchStartRef.current = t.clientX
+          }}
+          onTouchMove={(e) => {
+            const t = e.touches[0]
+            touchMoveRef.current = t.clientX
+          }}
+          onTouchEnd={() => {
+            const start = touchStartRef.current
+            const end = touchMoveRef.current ?? start
+            const dx = end - start
+            if (Math.abs(dx) > 50) {
+              if (dx < 0) setIndex((i) => (i + 1) % projects.length)
+              else setIndex((i) => (i - 1 + projects.length) % projects.length)
+            }
+            touchStartRef.current = 0
+            touchMoveRef.current = 0
+          }}
+        >
           {projects.map((p) => {
             const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
             // keep `src` as a site-root relative path (e.g. `/images/...`)
@@ -38,8 +60,8 @@ export default function ProjectCarousel({ projects }: Props) {
             return (
               <div className="slide" key={p.slug}>
                     <a href={`${base}/projects/${p.slug}`} className="carousel-link">
-                      {p.screenshots?.[0] ? (
-                        <img className="carousel-image" src={`${base}${src}`} alt={titleText} loading="lazy" />
+                        {p.screenshots?.[0] ? (
+                        <img className="carousel-image responsive-img" src={`${base}${src}`} alt={titleText} loading="lazy" />
                       ) : (
                         <div className="carousel-fallback" aria-hidden>
                           <div className="fallback-gradient" />
@@ -76,3 +98,5 @@ export default function ProjectCarousel({ projects }: Props) {
     </div>
   )
 }
+const touchStartRef: { current: number } = { current: 0 }
+const touchMoveRef: { current: number } = { current: 0 }

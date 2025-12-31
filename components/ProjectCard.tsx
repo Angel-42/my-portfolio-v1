@@ -31,7 +31,7 @@ export default function ProjectCard({ project, variant }: { project: Project, va
   return (
     <article className={`project-card ${variant === 'large' ? 'large' : 'small'}`}>
       <div className="project-thumb">
-        <img src={imgSrc} alt={`${titleText} thumbnail`} loading="lazy" />
+        <img src={imgSrc} alt={`${titleText} thumbnail`} loading="lazy" className="responsive-img" />
         <div className="thumb-overlay">
           <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', gap:12}}>
             <div className="thumb-title">{titleText}</div>

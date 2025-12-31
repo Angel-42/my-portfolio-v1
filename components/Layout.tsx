@@ -10,6 +10,7 @@ type Props = {
 export default function Layout({ children }: Props) {
   const router = useRouter()
   const isHome = router.pathname === '/' || router.asPath === '/'
+  
 
   useEffect(() => {
     const header = document.querySelector('.top-header') as HTMLElement | null
@@ -52,7 +53,6 @@ export default function Layout({ children }: Props) {
 
   const { lang, toggle, t } = useLanguage()
   const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
-
   return (
     <div className={`app-root ${isHome ? 'home-page' : ''}`}>
       <header className="top-header">
@@ -61,7 +61,7 @@ export default function Layout({ children }: Props) {
             <Link href="/">
               <picture>
                 <source srcSet={`${base}/logo.png`} type="image/png" />
-                <img src={`${base}/logo.svg`} alt="logo" className="site-logo large" />
+                <img src={`${base}/logo.svg`} alt="logo" className="site-logo large responsive-img" />
               </picture>
             </Link>
           </div>
@@ -86,7 +86,7 @@ export default function Layout({ children }: Props) {
         </div>
       </header>
 
-      <main className="app-content">{children}</main>
+      <main className="app-content container">{children}</main>
 
       <footer className="app-footer">
         © {new Date().getFullYear()} Angel SEVERAN — <a href="mailto:severan.angel.pro@gmail.com">{t('FOOTER.CONTACT')}</a>

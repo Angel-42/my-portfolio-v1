@@ -57,17 +57,7 @@ export const translations = {
       FEATURED_TITLE: 'Featured',
       FEATURED_MORE: 'See the full list of projects or learn more about me.'
     },
-    SIDEBAR: {
-      HOME: 'Home',
-      ABOUT: 'About',
-      PROJECTS: 'Projects',
-      CONTACT: 'Contact',
-      WHOAMI_TITLE: 'Who am I?',
-      WHOAMI_DESC: 'Angel SEVERAN — 3rd year Epitech student. Dev C/C++, TypeScript & mobile.',
-      IN_PROGRESS_TITLE: 'Ongoing projects',
-      COMPLETED_TITLE: 'Completed projects',
-      VIEW_ALL: 'View all'
-    },
+    // SIDEBAR keys removed
     ABOUT: {
       TITLE: 'About',
       INTRO: 'Hello — I am Angel SEVERAN, a 3rd year student at Epitech Montpellier.',
@@ -147,17 +137,7 @@ export const translations = {
       FEATURED_TITLE: "À l'affiche",
       FEATURED_MORE: "Voir la liste complète des projets ou en savoir plus sur moi."
     },
-    SIDEBAR: {
-      HOME: 'Accueil',
-      ABOUT: 'À propos',
-      PROJECTS: 'Projets',
-      CONTACT: 'Contact',
-      WHOAMI_TITLE: 'Qui suis‑je ?',
-      WHOAMI_DESC: 'Angel SEVERAN — étudiant 3ème année Epitech. Dév C/C++, TypeScript & mobile.',
-      IN_PROGRESS_TITLE: 'Projets en cours',
-      COMPLETED_TITLE: 'Projets réalisés',
-      VIEW_ALL: 'Voir tous'
-    },
+    // SIDEBAR keys removed
     ABOUT: {
       TITLE: 'À propos',
       INTRO: "Bonjour — je suis Angel SEVERAN, étudiant en 3ème année à Epitech Montpellier.",
