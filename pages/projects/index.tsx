@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import projects from '../../data/projects.json'
 import ProjectCard from '../../components/ProjectCard'
 import { useLanguage } from '../../context/LanguageContext'
@@ -6,42 +6,10 @@ import { useLanguage } from '../../context/LanguageContext'
 export default function ProjectsPage() {
   const [sortMode, setSortMode] = useState<'alpha' | 'date'>('date')
   const [order, setOrder] = useState<'desc' | 'asc'>('desc')
-  const [projectsState, setProjectsState] = useState(() => projects)
+  const [projectsState] = useState(() => projects)
   const { t, lang } = useLanguage()
 
-  // discover images named slug-1, slug-2, ... in public/images and attach to project data
-  useEffect(() => {
-    let mounted = true
-    const exts = ['.png', '.jpg', '.jpeg', '.webp', '.svg']
-    const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
-    ;(async () => {
-      const updated = await Promise.all(projects.map(async (p:any) => {
-        const slug = p.slug
-        const found: string[] = []
-        for (let i = 1; i <= 6; i++) {
-          let got = false
-          for (const ext of exts) {
-            try {
-              // discover using site-root relative paths (no base here)
-              // so the runtime can consistently prefix `NEXT_PUBLIC_BASE_PATH`
-              // once when rendering. This avoids double-prefixing that
-              // caused `/my-portfolio-v1/my-portfolio-v1/...` 404s.
-              const url = `/images/${slug}-${i}${ext}`
-              const res = await fetch(url, { method: 'GET' })
-              if (res.ok) { found.push(url); got = true; break }
-            } catch (e) {
-              // ignore
-            }
-          }
-          if (!got) break
-        }
-        if (found.length) return { ...p, screenshots: found }
-        return p
-      }))
-      if (mounted) setProjectsState(updated)
-    })()
-    return () => { mounted = false }
-  }, [])
+  // Removed dynamic image discovery; using screenshots from projects.json only
 
   const sorted = useMemo(() => {
     const list = [...projectsState]

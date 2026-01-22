@@ -8,38 +8,11 @@ import type { NewsItem } from '../lib/news'
 import { useLanguage } from '../context/LanguageContext'
 
 export default function Home({ latest }: { latest?: NewsItem[] }) {
-  const [projectsState, setProjectsState] = useState(() => projects)
+  const [projectsState] = useState(() => projects)
   const { t, lang } = useLanguage()
   const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-  // on mount, try to discover public images named slug-1, slug-2... and attach them to projects
-  useEffect(() => {
-    let mounted = true
-    const exts = ['.png', '.jpg', '.jpeg', '.webp', '.svg']
-    ;(async () => {
-      const updated = await Promise.all(projects.map(async (p:any) => {
-        const slug = p.slug
-        const found: string[] = []
-        for (let i = 1; i <= 4; i++) {
-          let got = false
-          for (const ext of exts) {
-            try {
-              const url = `/images/${slug}-${i}${ext}`
-              const res = await fetch(url, { method: 'GET' })
-              if (res.ok) { found.push(url); got = true; break }
-            } catch (e) {
-              // ignore
-            }
-          }
-          if (!got) break
-        }
-        if (found.length) return { ...p, screenshots: found }
-        return p
-      }))
-      if (mounted) setProjectsState(updated)
-    })()
-    return () => { mounted = false }
-  }, [])
+  // Removed dynamic image discovery; using screenshots from projects.json only
   // split projects into 'en cours' and 'réalisés'
   const inProgressRaw = projectsState.filter((p) => p.status === 'in-progress')
   const completedRaw = projectsState.filter((p) => p.status !== 'in-progress')
