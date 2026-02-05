@@ -56,7 +56,7 @@
     "status": "completed",
     "description": { "fr": "AreaTek3 — plateforme moderne (TypeScript, APIs, intégrations).", "en": "AreaTek3 — modern platform (TypeScript, APIs, integrations)." },
     "tech": ["TypeScript", "Node", "APIs"],
-    "repo": "",
+    "repo": "https://github.com/Angel-42/AreaTek3",
     "screenshots": ["/images/areatek3.svg"]
   },
   {
