@@ -60,14 +60,18 @@ export const translations = {
     // SIDEBAR keys removed
     ABOUT: {
       TITLE: 'About',
-      INTRO: 'Hello — I am Angel SEVERAN, a 3rd year student at Epitech Montpellier.',
+      INTRO: 'Passionate developer driven by creation, optimization, and elegant architecture. Currently in my third year at Epitech, I design robust solutions in C, C++, and TypeScript.',
       WHOAMI_TITLE: 'Who am I?',
-      WHOAMI_DESC: 'Interested in low-level programming and network architectures, I work on C/C++ projects as well as modern TypeScript and Flutter projects.',
-      SEARCH_TITLE: 'Looking for',
-      SEARCH_DESC: "I am looking for an internship of 4 to 6 months starting April 2026, ideally in systems, mobile or web development.",
+      WHOAMI_DESC: "I'm Angel, an aspiring software engineer with an insatiable hunger to understand how things work, from the lowest level (assembly, syscalls) to modern web abstractions. I believe in well-written code, subtle optimization, and the beauty of elegant algorithms.",
+      PASSIONS_TITLE: 'Passions & Universes',
+      PASSIONS_DESC: "Beyond the screen, I immerse myself in worlds that shape our imagination. <strong>Greek and Egyptian mythology</strong> fascinate me with their timeless symbols and hidden wisdom. <strong>Medieval history</strong> captivates me particularly — chivalry, castles, power chains and political intrigue. I spend my evenings with great <strong>books</strong> and <strong>music</strong>, exploring universes and melodies. These passions enrich my creativity and feed my perspective as a developer.",
       SKILLS_TITLE: 'Skills',
+      SKILLS_SOLID: '<strong>🔴 Solid</strong> — C, C++, Assembly, optimization, low-level, Linux, Bash, Git, multithreading, networking',
+      SKILLS_PRACTICE: '<strong>🟡 In practice</strong> — TypeScript, Node.js, React, Next.js, Flutter, Dart',
       FORMATION_TITLE: 'Education',
-      CONTACT_TITLE: 'Contact'
+      FORMATION_DESC: 'Epitech — Third year (Computer Science track) — Paris',
+      CTA_TEXT: "Looking for a curious, reliable, and creative developer for your projects? Let's talk about what's possible. I'd be delighted to explore new opportunities with you.",
+      CTA_BUTTON: "Let's talk"
     },
     CONTACT: {
       TITLE: 'Contact',
@@ -140,14 +144,18 @@ export const translations = {
     // SIDEBAR keys removed
     ABOUT: {
       TITLE: 'À propos',
-      INTRO: "Bonjour — je suis Angel SEVERAN, étudiant en 3ème année à Epitech Montpellier.",
-      WHOAMI_TITLE: 'Qui suis‑je ?',
-      WHOAMI_DESC: 'Passionné par la programmation bas‑niveau et les architectures réseau, je travaille sur des projets en C/C++ ainsi que sur des projets modernes en TypeScript et Flutter.',
-      SEARCH_TITLE: 'Recherche',
-      SEARCH_DESC: "Je suis à la recherche d'un stage de 4 à 6 mois à partir d'avril 2026, idéalement en développement système, mobile ou web.",
+      INTRO: 'Développeur passionné par la création, l\'optimisation et les architectures élégantes. Actuellement en 3ème année à Epitech, je conçois des solutions robustes en C, C++ et TypeScript.',
+      WHOAMI_TITLE: 'Qui suis-je ?',
+      WHOAMI_DESC: 'Je suis Angel, un ingénieur informatique en devenir avec une soif insatiable de comprendre comment les choses fonctionnent, du bas niveau (assembleur, syscalls) jusqu\'aux abstractions web modernes. Je crois au code bien écrit, à l\'optimisation subtile et à la beauté des algorithmes élégants.',
+      PASSIONS_TITLE: 'Passions & Univers',
+      PASSIONS_DESC: 'Au-delà de l\'écran, je me plonge dans les mondes qui façonnent notre imaginaire. La <strong>mythologie grecque et égyptienne</strong> me fascine par leurs symboles intemporels et leurs sagesses cachées. L\'<strong>histoire médiévale</strong> m\'attire particulièrement — chevalerie, châteaux, chaînes de pouvoir et intrigues politiques. Je passe mes soirées avec de bons <strong>livres</strong> et ma <strong>musique</strong>, explorant des univers et des mélodies. Ces passions enrichissent ma créativité et nourrissent ma perspective en tant que développeur.',
       SKILLS_TITLE: 'Compétences',
+      SKILLS_SOLID: '<strong>🔴 Solide</strong> — C, C++, Assembleur, optimisation, bas niveau, Linux, Bash, Git, multithreading, réseau',
+      SKILLS_PRACTICE: '<strong>🟡 En pratique</strong> — TypeScript, Node.js, React, Next.js, Flutter, Dart',
       FORMATION_TITLE: 'Formation',
-      CONTACT_TITLE: 'Contact'
+      FORMATION_DESC: 'Epitech — 3ème année (parcours informatique) — Paris',
+      CTA_TEXT: 'Vous recherchez un développeur curieux, fiable et créatif pour vos projets ? Parlons de ce qui est possible. Je serais ravi d\'explorer de nouvelles opportunités avec vous.',
+      CTA_BUTTON: 'Discutons'
     },
     CONTACT: {
       TITLE: 'Contact',
