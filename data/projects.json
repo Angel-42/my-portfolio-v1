@@ -1,5 +1,18 @@
 [
   {
+    "slug": "kansoos",
+    "title": { "fr": "KansoOS", "en": "KansoOS"},
+    "year": 2026,
+    "month": 2,
+    "category": "Gros Morceaux",
+    "status": "in-progress",
+    "description": { "fr": "Nous développons une ROM Android renforcée afin de créer un environnement numérique sécurisé, simplifié et géré à distance."; "en": "We are building a hardened Android ROM creating a safe, simplified, and remotely managed digital environment.
+" },
+    "tech": [ "Kotlin" ],
+    "repo": "https://github.com/KansoOS",
+    "screenshots": [/images/kansoos-logo.png"]
+  },
+  {
     "slug": "zappy",
     "title": { "fr": "Zappy", "en": "Zappy" },
     "year": 2025,
@@ -29,7 +42,7 @@
     "year": 2025,
     "month": 12,
     "category": "Gros Morceaux",
-    "status": "in-progress",
+    "status": "completed",
     "description": { "fr": "R-Type — projet d'année en cours, multithreading et réseau complexe.", "en": "R-Type — current year project, multithreading and complex networking." },
     "tech": ["C++", "Threads", "Network"],
     "repo": "https://github.com/EpiType/Air-Trap",
