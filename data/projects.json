@@ -6,7 +6,7 @@
     "month": 2,
     "category": "Gros Morceaux",
     "status": "in-progress",
-    "description": { "fr": "Nous développons une ROM Android renforcée afin de créer un environnement numérique sécurisé, simplifié et géré à distance."; "en": "We are building a hardened Android ROM creating a safe, simplified, and remotely managed digital environment.
+    "description": { "fr": "Nous développons une ROM Android renforcée afin de créer un environnement numérique sécurisé, simplifié et géré à distance.", "en": "We are building a hardened Android ROM creating a safe, simplified, and remotely managed digital environment.
 " },
     "tech": [ "Kotlin" ],
     "repo": "https://github.com/KansoOS",
